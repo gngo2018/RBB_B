@@ -24,7 +24,8 @@ namespace RedStarter.Business.Managers.Playlist
         {
             var rao = _mapper.Map<PlaylistCreateRAO>(dto);
 
-            await _repository.CreatePlaylist(rao);
+            if (await _repository.CreatePlaylist(rao))
+                return true;
 
             throw new NotImplementedException();
         }

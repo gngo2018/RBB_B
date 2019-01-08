@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -25,14 +26,22 @@ namespace RedStarter.API.Controllers.Playlist
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostNote(PlaylistCreateRequest request)
+        public async Task<IActionResult> PostPlaylist(PlaylistCreateRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
             var dto = _mapper.Map<PlaylistCreateDTO>(request);
             dto.DateCreated = DateTime.Now;
 
-            await _manager.CreatePlaylist(dto);
+            if (await _manager.CreatePlaylist(dto))
+                return StatusCode(201);
 
-            return Ok();
+            throw new Exception();
         }
     }
 }
