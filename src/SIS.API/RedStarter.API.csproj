@@ -31,4 +31,8 @@
     <None Include="SeedData\UserSeedData.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\PlaylistCollection\" />
+  </ItemGroup>
+
 </Project>
