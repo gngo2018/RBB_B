@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using RedStarter.API.DataContract.Playlist;
 using RedStarter.Business.DataContract.Playlist;
+using RedStarter.Database.Contexts.Playlist;
 using RedStarter.Database.DataContract.Playlist;
-using RedStarter.Database.Entities.Playlist;
 using System;
 using System.Collections.Generic;
 using System.Linq;

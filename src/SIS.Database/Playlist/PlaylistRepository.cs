@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using RedStarter.Database.Contexts;
+using RedStarter.Database.Contexts.Playlist;
 using RedStarter.Database.DataContract.Playlist;
-using RedStarter.Database.Entities.Playlist;
 using System;
 using System.Collections.Generic;
 using System.Text;

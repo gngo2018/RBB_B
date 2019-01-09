@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RedStarter.Database.Contexts.Playlist;
 using RedStarter.Database.Entities.Application;
 using RedStarter.Database.Entities.People;
-using RedStarter.Database.Entities.Playlist;
 using RedStarter.Database.Entities.Roles;
 
 namespace RedStarter.Database.Contexts
@@ -21,14 +21,13 @@ namespace RedStarter.Database.Contexts
         public SISContext(DbContextOptions<SISContext> options) 
             : base(options) { }
 
-
-        public DbSet<PlaylistEntity> PlaylistTableAccess { get; set; }
         public DbSet<UserEntity> UserTableAccess { get; set; }
         public DbSet<ApplicationEntity> ApplicationTableAccess { get; set; }
         public DbSet<ContactEntity> ContactTableAccess { get; set; }
         public DbSet<DemographicEntity> DemographicTableAccess { get; set; }
         public DbSet<EducationEntity> EducationTableAccess { get; set; }
         public DbSet<ExperienceEntity> ExperienceTableAccess { get; set; }
+        public DbSet<PlaylistEntity> PlaylistTableAccess { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

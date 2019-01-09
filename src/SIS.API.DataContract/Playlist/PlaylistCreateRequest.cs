@@ -6,7 +6,6 @@ namespace RedStarter.API.DataContract.Playlist
 {
     public class PlaylistCreateRequest
     {
-        public int SongId { get; set; }
         public string PlaylistName { get; set; }
     }
 }

@@ -11,7 +11,6 @@ using RedStarter.Business.DataContract.Playlist;
 
 namespace RedStarter.API.Controllers.Playlist
 {
-    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class PlaylistController : Controller
@@ -37,6 +36,7 @@ namespace RedStarter.API.Controllers.Playlist
 
             var dto = _mapper.Map<PlaylistCreateDTO>(request);
             dto.DateCreated = DateTime.Now;
+            dto.OwnerId = identityClaimNum;
 
             if (await _manager.CreatePlaylist(dto))
                 return StatusCode(201);

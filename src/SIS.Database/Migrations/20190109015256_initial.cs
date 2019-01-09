@@ -125,6 +125,21 @@ namespace RedStarter.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PlaylistTableAccess",
+                columns: table => new
+                {
+                    PlaylistEntityId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OwnerId = table.Column<int>(nullable: false),
+                    PlaylistName = table.Column<string>(nullable: false),
+                    DateCreated = table.Column<DateTimeOffset>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PlaylistTableAccess", x => x.PlaylistEntityId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -301,6 +316,9 @@ namespace RedStarter.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "ExperienceTableAccess");
+
+            migrationBuilder.DropTable(
+                name: "PlaylistTableAccess");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

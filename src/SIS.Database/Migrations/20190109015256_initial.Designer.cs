@@ -10,7 +10,7 @@ using RedStarter.Database.Contexts;
 namespace RedStarter.Database.Migrations
 {
     [DbContext(typeof(SISContext))]
-    [Migration("20181217153941_initial")]
+    [Migration("20190109015256_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,6 +89,24 @@ namespace RedStarter.Database.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("RedStarter.Database.Contexts.Playlist.PlaylistEntity", b =>
+                {
+                    b.Property<int>("PlaylistEntityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("DateCreated");
+
+                    b.Property<int>("OwnerId");
+
+                    b.Property<string>("PlaylistName")
+                        .IsRequired();
+
+                    b.HasKey("PlaylistEntityId");
+
+                    b.ToTable("PlaylistTableAccess");
                 });
 
             modelBuilder.Entity("RedStarter.Database.Entities.Application.ApplicationEntity", b =>
