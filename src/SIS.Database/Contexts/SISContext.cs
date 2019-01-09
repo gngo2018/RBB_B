@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using RedStarter.Database.Contexts.Playlist;
 using RedStarter.Database.Entities.Application;
 using RedStarter.Database.Entities.People;
+using RedStarter.Database.Entities.PlaylistCollection;
 using RedStarter.Database.Entities.Roles;
+using RedStarter.Database.Entities.Song;
 
 namespace RedStarter.Database.Contexts
 {
@@ -28,6 +30,8 @@ namespace RedStarter.Database.Contexts
         public DbSet<EducationEntity> EducationTableAccess { get; set; }
         public DbSet<ExperienceEntity> ExperienceTableAccess { get; set; }
         public DbSet<PlaylistEntity> PlaylistTableAccess { get; set; }
+        public DbSet<SongEntity> SongTableAccess { get; set; }
+        public DbSet<PlaylistCollectionEntity> PlaylistCollectionTableAccess { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
