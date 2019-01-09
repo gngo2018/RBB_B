@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RedStarter.Database.Contexts.Playlist;
 using RedStarter.Database.Entities.Application;
 using RedStarter.Database.Entities.People;
 using RedStarter.Database.Entities.Roles;
@@ -26,6 +27,7 @@ namespace RedStarter.Database.Contexts
         public DbSet<DemographicEntity> DemographicTableAccess { get; set; }
         public DbSet<EducationEntity> EducationTableAccess { get; set; }
         public DbSet<ExperienceEntity> ExperienceTableAccess { get; set; }
+        public DbSet<PlaylistEntity> PlaylistTableAccess { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -89,6 +89,24 @@ namespace RedStarter.Database.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("RedStarter.Database.Contexts.Playlist.PlaylistEntity", b =>
+                {
+                    b.Property<int>("PlaylistEntityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("DateCreated");
+
+                    b.Property<int>("OwnerId");
+
+                    b.Property<string>("PlaylistName")
+                        .IsRequired();
+
+                    b.HasKey("PlaylistEntityId");
+
+                    b.ToTable("PlaylistTableAccess");
+                });
+
             modelBuilder.Entity("RedStarter.Database.Entities.Application.ApplicationEntity", b =>
                 {
                     b.Property<Guid>("ApplicationEntityId")
