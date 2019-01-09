@@ -46,5 +46,14 @@ namespace RedStarter.Database.Playlist
 
             return rao;
         }
+
+        public async Task<bool> DeletePlaylist(int id)
+        {
+            var query = await _context.PlaylistTableAccess.SingleAsync(q => q.PlaylistEntityId == id);
+            _context.PlaylistTableAccess.Remove(query);
+
+            return await _context.SaveChangesAsync() == 1;
+
+        }
     }
 }

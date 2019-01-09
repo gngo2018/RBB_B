@@ -46,6 +46,11 @@ namespace RedStarter.Business.Managers.Playlist
             return dto;
         }
 
-
+        public async Task<bool> DeletePlaylist(int id)
+        {
+            if (await _repository.DeletePlaylist(id))
+                return true;
+            throw new NotImplementedException();
+        }
     }
 }

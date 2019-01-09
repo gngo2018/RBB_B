@@ -73,6 +73,26 @@ namespace RedStarter.API.Controllers.Playlist
             return Ok(response);
         }
 
+        //POST Playlist Delete
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePlaylist(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            if (await _manager.DeletePlaylist(id))
+                return StatusCode(207);
+
+
+            throw new Exception();
+        }
+
+        //PUT Playlist Update
+        [HttpGet]
+
+
         private int GetUser()
         {
             var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
