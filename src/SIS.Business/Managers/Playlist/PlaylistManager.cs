@@ -29,5 +29,13 @@ namespace RedStarter.Business.Managers.Playlist
 
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<PlaylistGetListItemDTO>> GetPlaylists()
+        {
+            var rao = await _repository.GetPlaylists();
+            var dto = _mapper.Map<IEnumerable<PlaylistGetListItemDTO>>(rao);
+
+            return dto;
+        }
     }
 }

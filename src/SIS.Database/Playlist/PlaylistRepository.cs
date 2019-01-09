@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RedStarter.Database.Contexts;
 using RedStarter.Database.Contexts.Playlist;
 using RedStarter.Database.DataContract.Playlist;
@@ -25,9 +26,17 @@ namespace RedStarter.Database.Playlist
         {
             var entity = _mapper.Map<PlaylistEntity>(rao);
 
-            _context.PlaylistTableAccess.AddAsync(entity);
+            await _context.PlaylistTableAccess.AddAsync(entity);
 
             return await _context.SaveChangesAsync() == 1;
+        }
+
+        public async Task<IEnumerable<PlaylistGetListItemRAO>> GetPlaylists()
+        {
+            var query = await _context.PlaylistTableAccess.ToArrayAsync();
+            var rao = _mapper.Map<IEnumerable<PlaylistGetListItemRAO>>(query);
+
+            return rao;
         }
     }
 }

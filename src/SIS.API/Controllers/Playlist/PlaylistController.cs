@@ -43,5 +43,22 @@ namespace RedStarter.API.Controllers.Playlist
 
             throw new Exception();
         }
+
+        [HttpGet]
+        //[Authorize(Roles = "User")]
+        public async Task<IActionResult> GetPlaylists()
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            var dto = await _manager.GetPlaylists();
+            var response = _mapper.Map<IEnumerable<PlaylistGetListItemResponse>>(dto);
+
+            return Ok(response); //Handle Exceptions
+        }
     }
 }

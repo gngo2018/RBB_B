@@ -8,5 +8,6 @@ namespace RedStarter.Database.DataContract.Playlist
     public interface IPlaylistRepository
     {
         Task<bool> CreatePlaylist(PlaylistCreateRAO rao);
+        Task<IEnumerable<PlaylistGetListItemRAO>> GetPlaylists();
     }
 }
