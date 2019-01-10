@@ -19,7 +19,6 @@ namespace RedStarter.Business.Managers.Playlist
             _repository = repository;
         }
 
-
         public async Task<bool> CreatePlaylist(PlaylistCreateDTO dto)
         {
             var rao = _mapper.Map<PlaylistCreateRAO>(dto);
@@ -29,7 +28,6 @@ namespace RedStarter.Business.Managers.Playlist
 
             throw new NotImplementedException();
         }
-
 
         public async Task<IEnumerable<PlaylistGetListItemDTO>> GetPlaylists()
         {
@@ -46,11 +44,21 @@ namespace RedStarter.Business.Managers.Playlist
             return dto;
         }
 
+        public async Task<bool> UpdatePlaylist(PlaylistUpdateDTO dto)
+        {
+            var rao = _mapper.Map<PlaylistUpdateRAO>(dto);
+            if (await _repository.UpdatePlaylist(rao))
+                return true;
+
+            throw new Exception();
+        }
+
         public async Task<bool> DeletePlaylist(int id)
         {
             if (await _repository.DeletePlaylist(id))
                 return true;
             throw new NotImplementedException();
         }
+
     }
 }

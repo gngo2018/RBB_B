@@ -6,5 +6,7 @@ namespace RedStarter.Database.DataContract.Playlist
 {
     public class PlaylistUpdateRAO
     {
+        public int PlaylistEntityId { get; set; }
+        public string PlaylistName { get; set; }
     }
 }

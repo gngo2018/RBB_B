@@ -89,11 +89,21 @@ namespace RedStarter.API.Controllers.Playlist
         }
 
         //PUT Playlist Update
-        [HttpPut]
-        //public async Task<IActionResult> UpdatePlaylist(PlaylistUpdateRequest request)
-        //{
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePlaylist(int id, PlaylistUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
 
-        //}
+            var dto = _mapper.Map<PlaylistUpdateDTO>(request);
+
+            if (await _manager.UpdatePlaylist(dto))
+                return StatusCode(202);
+
+            throw new Exception();
+        }
 
         private int GetUser()
         {
