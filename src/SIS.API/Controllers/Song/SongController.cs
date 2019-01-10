@@ -26,10 +26,10 @@ namespace RedStarter.API.Controllers.Song
         [HttpPost]
         public async Task<IActionResult> PostSong([FromForm]SongCreateRequest request)
         {
-            if (request.UploadedFile.ContentType != "audio/wave")
-            {
-                return BadRequest("Wrong file type");
-            }
+            //if (request.UploadedFile.ContentType != "audio/wave")
+            //{
+            //    return BadRequest("Wrong file type");
+            //}
 
             var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
