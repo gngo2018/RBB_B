@@ -58,5 +58,13 @@ namespace RedStarter.Database.Song
 
             return await _context.SaveChangesAsync() == 1;
         }
+
+        public async Task<bool> DeleteSong(int id)
+        {
+            var query = await _context.SongTableAccess.SingleAsync(q => q.SongEntityId == id);
+            _context.SongTableAccess.Remove(query);
+
+            return await _context.SaveChangesAsync() == 1;
+        }
     }
 }

@@ -90,5 +90,20 @@ namespace RedStarter.API.Controllers.Song
 
             throw new Exception();
         }
+
+        //POST Playlist Delete
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSong(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            if (await _manager.DeleteSong(id))
+                return StatusCode(207);
+
+            throw new Exception();
+        }
     }
 }

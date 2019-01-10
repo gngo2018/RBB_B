@@ -11,6 +11,7 @@ namespace RedStarter.Database.DataContract.Song
         Task<IEnumerable<SongGetListItemRAO>> GetSongs();
         Task<SongGetListItemRAO> GetSongById(int id);
         Task<bool> UpdateSong(SongUpdateRAO rao);
+        Task<bool> DeleteSong(int id);
 
     }
 }
