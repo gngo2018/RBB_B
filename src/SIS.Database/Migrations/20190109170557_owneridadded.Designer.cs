@@ -10,8 +10,8 @@ using RedStarter.Database.Contexts;
 namespace RedStarter.Database.Migrations
 {
     [DbContext(typeof(SISContext))]
-    [Migration("20190107193405_firstmigrate")]
-    partial class firstmigrate
+    [Migration("20190109170557_owneridadded")]
+    partial class owneridadded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,6 +89,24 @@ namespace RedStarter.Database.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("RedStarter.Database.Contexts.Playlist.PlaylistEntity", b =>
+                {
+                    b.Property<int>("PlaylistEntityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("DateCreated");
+
+                    b.Property<int>("OwnerId");
+
+                    b.Property<string>("PlaylistName")
+                        .IsRequired();
+
+                    b.HasKey("PlaylistEntityId");
+
+                    b.ToTable("PlaylistTableAccess");
                 });
 
             modelBuilder.Entity("RedStarter.Database.Entities.Application.ApplicationEntity", b =>
@@ -233,6 +251,25 @@ namespace RedStarter.Database.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("RedStarter.Database.Entities.PlaylistCollection.PlaylistCollectionEntity", b =>
+                {
+                    b.Property<int>("PlaylistCollectionEntityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("DateCreated");
+
+                    b.Property<int>("OwnerId");
+
+                    b.Property<int>("PlaylistId");
+
+                    b.Property<int>("SongId");
+
+                    b.HasKey("PlaylistCollectionEntityId");
+
+                    b.ToTable("PlaylistCollectionTableAccess");
+                });
+
             modelBuilder.Entity("RedStarter.Database.Entities.Roles.RoleEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -269,6 +306,33 @@ namespace RedStarter.Database.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("RedStarter.Database.Entities.Song.SongEntity", b =>
+                {
+                    b.Property<int>("SongEntityId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("GoogleId");
+
+                    b.Property<int>("OwnerId");
+
+                    b.Property<string>("SongAlbum");
+
+                    b.Property<string>("SongArtist")
+                        .IsRequired();
+
+                    b.Property<string>("SongGenre");
+
+                    b.Property<string>("SongLength");
+
+                    b.Property<string>("SongTitle")
+                        .IsRequired();
+
+                    b.HasKey("SongEntityId");
+
+                    b.ToTable("SongTableAccess");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

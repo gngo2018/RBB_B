@@ -15,18 +15,30 @@ using Microsoft.IdentityModel.Tokens;
 using RedStarter.API.MappingProfiles;
 using RedStarter.Business.DataContract.Application.Interfaces;
 using RedStarter.Business.DataContract.Authorization.Interfaces;
+using RedStarter.Business.DataContract.Playlist;
+using RedStarter.Business.DataContract.PlaylistCollection;
+using RedStarter.Business.DataContract.Song;
 using RedStarter.Business.Managers.Application;
 using RedStarter.Business.Managers.Authorization;
+using RedStarter.Business.Managers.Playlist;
+using RedStarter.Business.Managers.PlaylistCollection;
+using RedStarter.Business.Managers.Song;
 using RedStarter.Database.Application;
 using RedStarter.Database.Authorization;
 using RedStarter.Database.Contexts;
 using RedStarter.Database.DataContract.Application;
 using RedStarter.Database.DataContract.Authorization.Interfaces;
+using RedStarter.Database.DataContract.Playlist;
+using RedStarter.Database.DataContract.PlaylistCollection;
 using RedStarter.Database.DataContract.Roles.Interfaces;
+using RedStarter.Database.DataContract.Song;
 using RedStarter.Database.Entities.People;
 using RedStarter.Database.Entities.Roles;
+using RedStarter.Database.Playlist;
+using RedStarter.Database.PlaylistCollection;
 using RedStarter.Database.Roles;
 using RedStarter.Database.SeedData;
+using RedStarter.Database.Song;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Net;
 using System.Text;
@@ -95,6 +107,9 @@ namespace RedStarter.API
             {
                 mc.AddProfile(new MappingProfile());
                 mc.AddProfile(new ApplicationMappingProfile());
+                mc.AddProfile(new PlaylistMappingProfile());
+                mc.AddProfile(new SongMappingProfile());
+                mc.AddProfile(new PlaylistCollectionMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
@@ -107,6 +122,12 @@ namespace RedStarter.API
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IUserApplicationManager, UserApplicationManager>();
+            services.AddScoped<IPlaylistManager, PlaylistManager>();
+            services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+            services.AddScoped<ISongManager, SongManager>();
+            services.AddScoped<ISongRepository, SongRepository>();
+            services.AddScoped<IPlaylistCollectionManager, PlaylistCollectionManager>();
+            services.AddScoped<IPlaylistCollectionRepository, PlaylistCollectionRepository>();
 
             //======= Swagger =======
             services.AddSwaggerGen(c =>
