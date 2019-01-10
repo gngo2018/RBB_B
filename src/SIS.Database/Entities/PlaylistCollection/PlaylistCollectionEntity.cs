@@ -12,9 +12,9 @@ namespace RedStarter.Database.Entities.PlaylistCollection
         [Required]
         public int OwnerId { get; set; }
         [Required]
-        public int PlaylistId { get; set; }
+        public int PlaylistEntityId { get; set; }
         [Required]
-        public int SongId { get; set; }
+        public int SongEntityId { get; set; }
         [Required]
         public DateTimeOffset DateCreated { get; set; }
     }
