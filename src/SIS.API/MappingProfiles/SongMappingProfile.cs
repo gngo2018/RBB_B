@@ -17,6 +17,11 @@ namespace RedStarter.API.MappingProfiles
             CreateMap<SongCreateRequest, SongCreateDTO>();
             CreateMap<SongCreateDTO, SongCreateRAO>();
             CreateMap<SongCreateRAO, SongEntity>();
+
+            CreateMap<SongEntity, SongGetListItemRAO>();
+            CreateMap<SongGetListItemRAO, SongGetListItemDTO>();
+            CreateMap<SongGetListItemDTO, SongGetListItemResponse>();
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,6 +9,7 @@ namespace RedStarter.Business.DataContract.Song
     {
         public int OwnerId { get; set; }
         public int GoogleId { get; set; }
+        public IFormFile UploadedFile { get; set; }
         public string SongTitle { get; set; }
         public string SongArtist { get; set; }
         public string SongGenre { get; set; }

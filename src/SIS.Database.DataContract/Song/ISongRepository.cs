@@ -8,5 +8,7 @@ namespace RedStarter.Database.DataContract.Song
     public interface ISongRepository
     {
         Task<bool> CreateSong(SongCreateRAO rao);
+        Task<IEnumerable<SongGetListItemRAO>> GetSongs();
+
     }
 }

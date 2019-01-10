@@ -24,11 +24,11 @@ namespace RedStarter.API.Controllers.Song
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostSong(SongCreateRequest request)
+        public async Task<IActionResult> PostSong([FromForm]SongCreateRequest request)
         {
-            if (!ModelState.IsValid)
+            if (request.UploadedFile.ContentType != "audio/wave")
             {
-                return StatusCode(400);
+                return BadRequest("Wrong file type");
             }
 
             var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -40,6 +40,22 @@ namespace RedStarter.API.Controllers.Song
                 return StatusCode(201);
 
             throw new Exception();
+        }
+
+        //GET All Songs
+        [HttpGet]
+        //[Authorize(Roles = "User")]
+        public async Task<IActionResult> GetPlaylists()
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var dto = await _manager.GetSongs();
+            var response = _mapper.Map<IEnumerable<SongGetListItemResponse>>(dto);
+
+            return Ok(response); //Handle Exceptions
         }
     }
 }

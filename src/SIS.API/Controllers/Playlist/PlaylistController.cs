@@ -85,13 +85,15 @@ namespace RedStarter.API.Controllers.Playlist
             if (await _manager.DeletePlaylist(id))
                 return StatusCode(207);
 
-
             throw new Exception();
         }
 
         //PUT Playlist Update
-        [HttpGet]
+        [HttpPut]
+        //public async Task<IActionResult> UpdatePlaylist(PlaylistUpdateRequest request)
+        //{
 
+        //}
 
         private int GetUser()
         {

@@ -8,6 +8,7 @@ namespace RedStarter.Database.DataContract.Song
     {
         public int OwnerId { get; set; }
         public int GoogleId { get; set; }
+        public string UploadedLink { get; set; }
         public string SongTitle { get; set; }
         public string SongArtist { get; set; }
         public string SongGenre { get; set; }

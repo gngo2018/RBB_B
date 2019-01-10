@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RedStarter.Database.Contexts;
 using RedStarter.Database.DataContract.Song;
 using RedStarter.Database.Entities.Song;
@@ -27,6 +28,14 @@ namespace RedStarter.Database.Song
             await _context.SongTableAccess.AddAsync(entity);
 
             return await _context.SaveChangesAsync() == 1;
+        }
+
+        public async Task<IEnumerable<SongGetListItemRAO>> GetSongs()
+        {
+            var query = await _context.SongTableAccess.ToArrayAsync();
+            var rao = _mapper.Map<IEnumerable<SongGetListItemRAO>>(query);
+
+            return rao;
         }
     }
 }
