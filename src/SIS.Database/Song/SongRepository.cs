@@ -45,5 +45,18 @@ namespace RedStarter.Database.Song
 
             return rao;
         }
+
+        public async Task<bool> UpdateSong(SongUpdateRAO rao)
+        {
+            var entity = await _context.SongTableAccess.SingleOrDefaultAsync(e => e.SongEntityId == rao.SongEntityId);
+            entity.UploadedLink = rao.UploadedLink;
+            entity.SongTitle = rao.SongTitle;
+            entity.SongArtist = rao.SongArtist;
+            entity.SongGenre = rao.SongGenre;
+            entity.SongLength = rao.SongLength;
+            entity.SongAlbum = rao.SongAlbum;
+
+            return await _context.SaveChangesAsync() == 1;
+        }
     }
 }

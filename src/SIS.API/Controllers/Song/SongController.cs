@@ -73,5 +73,22 @@ namespace RedStarter.API.Controllers.Song
 
             return Ok(response);
         }
+
+        //PUT Song Update
+        [HttpPut]
+        public async Task<IActionResult> UpdateSong([FromForm]SongUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var dto = _mapper.Map<SongUpdateDTO>(request);
+
+            if (await _manager.UpdateSong(dto))
+                return StatusCode(202);
+
+            throw new Exception();
+        }
     }
 }

@@ -7,7 +7,6 @@ namespace RedStarter.API.DataContract.Song
 {
     public class SongCreateRequest
     {
-        public int GoogleId { get; set; }
         public IFormFile UploadedFile { get; set; }
         public string SongTitle { get; set; }
         public string SongArtist { get; set; }

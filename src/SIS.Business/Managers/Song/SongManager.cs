@@ -48,5 +48,18 @@ namespace RedStarter.Business.Managers.Song
             return dto;
         }
 
+        public async Task<bool> UpdateSong(SongUpdateDTO dto)
+        {
+            var rao = _mapper.Map<SongUpdateRAO>(dto);
+            var engine = new SaveFileEngine();
+            var uri = engine.Upload(dto.UploadedFile);
+            rao.UploadedLink = uri;
+
+            if (await _repository.UpdateSong(rao))
+                return true;
+
+            throw new NotImplementedException();
+
+        }
     }
 }
