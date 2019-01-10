@@ -3,16 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RedStarter.Business.DataContract.Song
+namespace RedStarter.API.DataContract.Song
 {
-    public class SongCreateDTO
+    public class SongUpdateRequest
     {
-        public int OwnerId { get; set; }
+        public int SongEntityId { get; set; }
         public IFormFile UploadedFile { get; set; }
         public string SongTitle { get; set; }
         public string SongArtist { get; set; }
         public string SongGenre { get; set; }
         public string SongLength { get; set; }
         public string SongAlbum { get; set; }
+
     }
 }

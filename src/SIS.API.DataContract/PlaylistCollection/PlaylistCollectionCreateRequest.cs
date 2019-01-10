@@ -6,7 +6,7 @@ namespace RedStarter.API.DataContract.PlaylistCollection
 {
     public class PlaylistCollectionCreateRequest
     {
-        public int SongId { get; set; }
-        public int PlaylistId { get; set; }
+        public int SongEntityId { get; set; }
+        public int PlaylistEntityId { get; set; }
     }
 }

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace RedStarter.Business.DataContract.Song
 {
-    public class SongCreateDTO
+    public class SongUpdateDTO
     {
-        public int OwnerId { get; set; }
+        public int SongEntityId { get; set; }
         public IFormFile UploadedFile { get; set; }
         public string SongTitle { get; set; }
         public string SongArtist { get; set; }

@@ -17,6 +17,11 @@ namespace RedStarter.API.Controllers.Playlist
     {
         private readonly IMapper _mapper;
         private readonly IPlaylistManager _manager;
+        private int GetUser()
+        {
+            var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            return identityClaimNum;
+        }
 
         public PlaylistController(IMapper mapper, IPlaylistManager manager)
         {
@@ -24,6 +29,7 @@ namespace RedStarter.API.Controllers.Playlist
             _manager = manager;
         }
 
+        //POST Create Playlist
         [HttpPost]
         public async Task<IActionResult> PostPlaylist(PlaylistCreateRequest request)
         {
@@ -32,11 +38,9 @@ namespace RedStarter.API.Controllers.Playlist
                 return StatusCode(400);
             }
 
-            var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
             var dto = _mapper.Map<PlaylistCreateDTO>(request);
             dto.DateCreated = DateTime.Now;
-            dto.OwnerId = identityClaimNum;
+            dto.OwnerId = GetUser();
 
             if (await _manager.CreatePlaylist(dto))
                 return StatusCode(201);
@@ -44,6 +48,7 @@ namespace RedStarter.API.Controllers.Playlist
             throw new Exception();
         }
 
+        //GET All Playlists
         [HttpGet]
         //[Authorize(Roles = "User")]
         public async Task<IActionResult> GetPlaylists()
@@ -53,12 +58,58 @@ namespace RedStarter.API.Controllers.Playlist
                 return StatusCode(400);
             }
 
-            var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
             var dto = await _manager.GetPlaylists();
             var response = _mapper.Map<IEnumerable<PlaylistGetListItemResponse>>(dto);
 
             return Ok(response); //Handle Exceptions
+        }
+
+        //GET Playlist Detail
+        [HttpGet("{id}")]
+        //[Authorize(Roles = "User")]
+        public async Task<IActionResult> GetPlaylistById(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var dto = await _manager.GetPlaylistById(id);
+            var response = _mapper.Map<PlaylistGetListItemResponse>(dto);
+
+            return Ok(response);
+        }
+
+        //PUT Playlist Update
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePlaylist(int id, PlaylistUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var dto = _mapper.Map<PlaylistUpdateDTO>(request);
+
+            if (await _manager.UpdatePlaylist(dto))
+                return StatusCode(202);
+
+            throw new Exception();
+        }
+
+        //POST Playlist Delete
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePlaylist(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            if (await _manager.DeletePlaylist(id))
+                return StatusCode(207);
+
+            throw new Exception();
         }
     }
 }
