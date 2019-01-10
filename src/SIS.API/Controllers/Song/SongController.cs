@@ -45,7 +45,7 @@ namespace RedStarter.API.Controllers.Song
         //GET All Songs
         [HttpGet]
         //[Authorize(Roles = "User")]
-        public async Task<IActionResult> GetPlaylists()
+        public async Task<IActionResult> GetSongs()
         {
             if (!ModelState.IsValid)
             {
@@ -56,6 +56,22 @@ namespace RedStarter.API.Controllers.Song
             var response = _mapper.Map<IEnumerable<SongGetListItemResponse>>(dto);
 
             return Ok(response); //Handle Exceptions
+        }
+
+        //GET Song Detail
+        [HttpGet("{id}")]
+        //[Authorize(Roles = "User")]
+        public async Task<IActionResult> GetSongById(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var dto = await _manager.GetSongById(id);
+            var response = _mapper.Map<SongGetListItemResponse>(dto);
+
+            return Ok(response);
         }
     }
 }

@@ -9,6 +9,8 @@ namespace RedStarter.Business.DataContract.Song
     {
         Task<bool> CreateSong(SongCreateDTO dto);
         Task<IEnumerable<SongGetListItemDTO>> GetSongs();
+        Task<SongGetListItemDTO> GetSongById(int id);
+
 
 
     }

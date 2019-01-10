@@ -40,5 +40,13 @@ namespace RedStarter.Business.Managers.Song
 
             return dto;
         }
+        public async Task<SongGetListItemDTO> GetSongById(int id)
+        {
+            var rao = await _repository.GetSongById(id);
+            var dto = _mapper.Map<SongGetListItemDTO>(rao);
+
+            return dto;
+        }
+
     }
 }

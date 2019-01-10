@@ -30,10 +30,18 @@ namespace RedStarter.Database.Song
             return await _context.SaveChangesAsync() == 1;
         }
 
+
         public async Task<IEnumerable<SongGetListItemRAO>> GetSongs()
         {
             var query = await _context.SongTableAccess.ToArrayAsync();
             var rao = _mapper.Map<IEnumerable<SongGetListItemRAO>>(query);
+
+            return rao;
+        }
+        public async Task<SongGetListItemRAO> GetSongById(int id)
+        {
+            var query = await _context.SongTableAccess.SingleAsync(q => q.SongEntityId == id);
+            var rao = _mapper.Map<SongGetListItemRAO>(query);
 
             return rao;
         }
