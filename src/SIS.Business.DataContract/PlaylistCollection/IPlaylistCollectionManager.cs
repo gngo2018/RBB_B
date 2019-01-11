@@ -9,6 +9,7 @@ namespace RedStarter.Business.DataContract.PlaylistCollection
     {
         Task<bool> CreatePlaylistCollection(PlaylistCollectionCreateDTO dto);
         Task<IEnumerable<PlaylistCollectionGetListItemDTO>> GetPlaylistCollections();
+        Task<PlaylistCollectionGetListItemDTO> GetPlaylistCollectionById(int id);
 
     }
 }

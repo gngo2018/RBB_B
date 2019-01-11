@@ -38,5 +38,13 @@ namespace RedStarter.Database.PlaylistCollection
 
             return rao;
         }
+
+        public async Task<PlaylistCollectionGetListItemRAO> GetPlaylistCollectionById(int id)
+        {
+            var query = await _context.PlaylistCollectionTableAccess.SingleAsync(q => q.PlaylistCollectionEntityId == id);
+            var rao = _mapper.Map<PlaylistCollectionGetListItemRAO>(query);
+
+            return rao;
+        }
     }
 }

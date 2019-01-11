@@ -36,5 +36,13 @@ namespace RedStarter.Business.Managers.PlaylistCollection
 
             return dto;
         }
+
+        public async Task<PlaylistCollectionGetListItemDTO> GetPlaylistCollectionById(int id)
+        {
+            var rao = await _repository.GetPlaylistCollectionById(id);
+            var dto = _mapper.Map<PlaylistCollectionGetListItemDTO>(rao);
+
+            return dto;
+        }
     }
 }

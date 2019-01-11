@@ -43,7 +43,7 @@ namespace RedStarter.API.Controllers.PlaylistCollection
             throw new Exception();
         }
 
-        //GET All Songs
+        //GET All Playlist Collections
         [HttpGet]
         //[Authorize(Roles = "User")]
         public async Task<IActionResult> GetPlaylistCollections()
@@ -57,6 +57,22 @@ namespace RedStarter.API.Controllers.PlaylistCollection
             var response = _mapper.Map<IEnumerable<PlaylistCollectionGetListItemResponse>>(dto);
 
             return Ok(response); //Handle Exceptions
+        }
+
+        //GET Playlist Collection Detail
+        [HttpGet("{id}")]
+        //[Authorize(Roles = "User")]
+        public async Task<IActionResult> GetPlaylistCollectionById(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var dto = await _manager.GetPlaylistCollectionById(id);
+            var response = _mapper.Map<PlaylistCollectionGetListItemResponse>(dto);
+
+            return Ok(response);
         }
     }
 }
