@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using RedStarter.Database.Contexts;
 using RedStarter.Database.DataContract.PlaylistCollection;
+using RedStarter.Database.DataContract.Song;
 using RedStarter.Database.Entities.PlaylistCollection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,12 +41,17 @@ namespace RedStarter.Database.PlaylistCollection
             return rao;
         }
 
-        public async Task<PlaylistCollectionGetListItemRAO> GetPlaylistCollectionById(int id)
+        public async Task<IEnumerable<SongGetListItemRAO>> GetPlaylistCollectionById(int id)
         {
-            var query = await _context.PlaylistCollectionTableAccess.SingleAsync(q => q.PlaylistCollectionEntityId == id);
-            var rao = _mapper.Map<PlaylistCollectionGetListItemRAO>(query);
+            var query = await _context.PlaylistCollectionTableAccess.Where(e => e.PlaylistEntityId == id).ToArrayAsync();
+            var songs = new List<SongGetListItemRAO>();
+            foreach (PlaylistCollectionEntity entity in query)
+            {
+                var activeQuery = await _context.SongTableAccess.SingleOrDefaultAsync(e => e.SongEntityId == entity.SongEntityId);
+                songs.Add(_mapper.Map<SongGetListItemRAO>(activeQuery));
+            }
 
-            return rao;
+            return songs;
         }
     }
 }

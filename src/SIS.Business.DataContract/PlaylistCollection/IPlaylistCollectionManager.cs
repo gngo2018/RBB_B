@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RedStarter.Business.DataContract.Song;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,8 @@ namespace RedStarter.Business.DataContract.PlaylistCollection
     {
         Task<bool> CreatePlaylistCollection(PlaylistCollectionCreateDTO dto);
         Task<IEnumerable<PlaylistCollectionGetListItemDTO>> GetPlaylistCollections();
-        Task<PlaylistCollectionGetListItemDTO> GetPlaylistCollectionById(int id);
+        Task<IEnumerable<SongGetListItemDTO>> GetPlaylistCollectionById(int id);
+
 
     }
 }

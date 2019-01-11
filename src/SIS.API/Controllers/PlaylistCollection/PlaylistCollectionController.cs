@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RedStarter.API.DataContract.PlaylistCollection;
+using RedStarter.API.DataContract.Song;
 using RedStarter.Business.DataContract.PlaylistCollection;
 
 namespace RedStarter.API.Controllers.PlaylistCollection
@@ -69,8 +70,8 @@ namespace RedStarter.API.Controllers.PlaylistCollection
                 return StatusCode(400);
             }
 
-            var dto = await _manager.GetPlaylistCollectionById(id);
-            var response = _mapper.Map<PlaylistCollectionGetListItemResponse>(dto);
+            var dtos = await _manager.GetPlaylistCollectionById(id);
+            var response = _mapper.Map<IEnumerable<SongGetListItemResponse>>(dtos);
 
             return Ok(response);
         }
