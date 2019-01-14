@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using RedStarter.API.DataContract.PlaylistCollection;
+using RedStarter.API.DataContract.Song;
 using RedStarter.Business.DataContract.PlaylistCollection;
 
 namespace RedStarter.API.Controllers.PlaylistCollection
@@ -39,6 +40,53 @@ namespace RedStarter.API.Controllers.PlaylistCollection
 
             if (await _manager.CreatePlaylistCollection(dto))
                 return StatusCode(201);
+
+            throw new Exception();
+        }
+
+        //GET All Playlist Collections
+        [HttpGet]
+        //[Authorize(Roles = "User")]
+        public async Task<IActionResult> GetPlaylistCollections()
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var dto = await _manager.GetPlaylistCollections();
+            var response = _mapper.Map<IEnumerable<PlaylistCollectionGetListItemResponse>>(dto);
+
+            return Ok(response); //Handle Exceptions
+        }
+
+        //GET Playlist Collection Detail
+        [HttpGet("{id}")]
+        //[Authorize(Roles = "User")]
+        public async Task<IActionResult> GetPlaylistCollectionById(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            var dtos = await _manager.GetPlaylistCollectionById(id);
+            var response = _mapper.Map<IEnumerable<SongGetListItemResponse>>(dtos);
+
+            return Ok(response);
+        }
+
+        //POST Song Delete
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePlaylistCollection(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            if (await _manager.DeletePlaylistCollection(id))
+                return StatusCode(207);
 
             throw new Exception();
         }

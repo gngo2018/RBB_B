@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RedStarter.Business.Managers.Song
 {
-    public class SongManager: ISongManager
+    public class SongManager : ISongManager
     {
         private readonly IMapper _mapper;
         private readonly ISongRepository _repository;
@@ -48,5 +48,25 @@ namespace RedStarter.Business.Managers.Song
             return dto;
         }
 
+        public async Task<bool> UpdateSong(SongUpdateDTO dto)
+        {
+            var rao = _mapper.Map<SongUpdateRAO>(dto);
+            var engine = new SaveFileEngine();
+            var uri = engine.Upload(dto.UploadedFile);
+            rao.UploadedLink = uri;
+
+            if (await _repository.UpdateSong(rao))
+                return true;
+
+            throw new NotImplementedException();
+
+        }
+
+        public async Task<bool> DeleteSong(int id)
+        {
+            if (await _repository.DeleteSong(id))
+                return true;
+            throw new NotImplementedException();
+        }
     }
 }

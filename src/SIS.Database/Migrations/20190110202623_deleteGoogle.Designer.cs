@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RedStarter.Database.Contexts;
 
 namespace RedStarter.Database.Migrations
 {
     [DbContext(typeof(SISContext))]
-    partial class SISContextModelSnapshot : ModelSnapshot
+    [Migration("20190110202623_deleteGoogle")]
+    partial class deleteGoogle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,9 +261,9 @@ namespace RedStarter.Database.Migrations
 
                     b.Property<int>("OwnerId");
 
-                    b.Property<int>("PlaylistEntityId");
+                    b.Property<int>("PlaylistId");
 
-                    b.Property<int>("SongEntityId");
+                    b.Property<int>("SongId");
 
                     b.HasKey("PlaylistCollectionEntityId");
 

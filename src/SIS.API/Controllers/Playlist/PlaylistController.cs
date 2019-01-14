@@ -17,12 +17,18 @@ namespace RedStarter.API.Controllers.Playlist
     {
         private readonly IMapper _mapper;
         private readonly IPlaylistManager _manager;
+        private int GetUser()
+        {
+            var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            return identityClaimNum;
+        }
 
         public PlaylistController(IMapper mapper, IPlaylistManager manager)
         {
             _mapper = mapper;
             _manager = manager;
         }
+
         //POST Create Playlist
         [HttpPost]
         public async Task<IActionResult> PostPlaylist(PlaylistCreateRequest request)
@@ -41,6 +47,7 @@ namespace RedStarter.API.Controllers.Playlist
 
             throw new Exception();
         }
+
         //GET All Playlists
         [HttpGet]
         //[Authorize(Roles = "User")]
@@ -73,21 +80,6 @@ namespace RedStarter.API.Controllers.Playlist
             return Ok(response);
         }
 
-        //POST Playlist Delete
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePlaylist(int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return StatusCode(400);
-            }
-
-            if (await _manager.DeletePlaylist(id))
-                return StatusCode(207);
-
-            throw new Exception();
-        }
-
         //PUT Playlist Update
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePlaylist(int id, PlaylistUpdateRequest request)
@@ -105,10 +97,19 @@ namespace RedStarter.API.Controllers.Playlist
             throw new Exception();
         }
 
-        private int GetUser()
+        //POST Playlist Delete
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePlaylist(int id)
         {
-            var identityClaimNum = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            return identityClaimNum;
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            if (await _manager.DeletePlaylist(id))
+                return StatusCode(207);
+
+            throw new Exception();
         }
     }
 }

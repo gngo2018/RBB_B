@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RedStarter.Business.DataContract.PlaylistCollection;
+using RedStarter.Business.DataContract.Song;
 using RedStarter.Database.DataContract.PlaylistCollection;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,27 @@ namespace RedStarter.Business.Managers.PlaylistCollection
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<PlaylistCollectionGetListItemDTO>> GetPlaylistCollections()
+        {
+            var rao = await _repository.GetPlaylistCollections();
+            var dto = _mapper.Map<IEnumerable<PlaylistCollectionGetListItemDTO>>(rao);
 
+            return dto;
+        }
+
+        public async Task<IEnumerable<SongGetListItemDTO>> GetPlaylistCollectionById(int id)
+        {
+            var raos = await _repository.GetPlaylistCollectionById(id);
+            var dtos = _mapper.Map<IEnumerable<SongGetListItemDTO>>(raos);
+
+            return dtos;
+        }
+
+        public async Task<bool> DeletePlaylistCollection(int id)
+        {
+            if (await _repository.DeletePlaylistCollection(id))
+                return true;
+            throw new NotImplementedException();
+        }
     }
 }

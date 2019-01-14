@@ -10,8 +10,6 @@ namespace RedStarter.Database.Entities.Song
         [Key]
         public int SongEntityId { get; set; }
         [Required]
-        public int GoogleId { get; set; }
-        [Required]
         public int OwnerId { get; set; }
         [Required]
         public string SongTitle { get; set; }
