@@ -11,7 +11,7 @@ namespace RedStarter.Business.DataContract.PlaylistCollection
         Task<bool> CreatePlaylistCollection(PlaylistCollectionCreateDTO dto);
         Task<IEnumerable<PlaylistCollectionGetListItemDTO>> GetPlaylistCollections();
         Task<IEnumerable<SongGetListItemDTO>> GetPlaylistCollectionById(int id);
-
+        Task<bool> DeletePlaylistCollection(int id);
 
     }
 }

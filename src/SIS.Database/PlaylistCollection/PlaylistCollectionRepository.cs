@@ -53,5 +53,16 @@ namespace RedStarter.Database.PlaylistCollection
 
             return songs;
         }
+
+        public async Task<bool> DeletePlaylistCollection(int id)
+        {
+            var queryTable = _context.PlaylistCollectionTableAccess.Where(q => q.PlaylistEntityId == id);
+            foreach (PlaylistCollectionEntity entity in queryTable)
+            {
+                _context.PlaylistCollectionTableAccess.Remove(entity);
+            }
+
+            return await _context.SaveChangesAsync() == queryTable.Count();
+        }
     }
 }

@@ -75,5 +75,20 @@ namespace RedStarter.API.Controllers.PlaylistCollection
 
             return Ok(response);
         }
+
+        //POST Song Delete
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePlaylistCollection(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(400);
+            }
+
+            if (await _manager.DeletePlaylistCollection(id))
+                return StatusCode(207);
+
+            throw new Exception();
+        }
     }
 }
