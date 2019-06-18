@@ -1,8 +1,23 @@
 # DotNetCore-WebApi-Starter
+Web audio player application which allows users to upload mp3 files and set them to a specific playlist.
+https://red-badge-beats.herokuapp.com/ 
+
+## Code Examples
+- Relational Database
+    - Having tables interact with each other in order to store multiple songs to a playlist
+        - Playlist table: Creates a playlist entity
+        - Song table: Creates a song entity
+        - PlaylistCollection table: Acts as an inner join table
+    - Use of entity framework and LINQ to query the database
+- Cloudinary API
+    - Used in order to store mp3 files
+
+## Documentation
+1. Cloudinary: https://cloudinary.com/documentation
 
 ## Architecture
 This project uses N-Tier architecture to encapsulate structural concerns of the application into assemblies per concern.
-Projects with the ".DataContract" suffix contain only DataContracts and Interfaces. The corresponding similarly named project implements the contract project.
+Projects with the ".DataContract" suffix contain only DataContracts and Interfaces. The corresponding similarly named project implements the contract project. Used source code from Eleven Fifty Academy for architecture: https://github.com/gngo2018/.NetCoreRedStarter 
 
 #### Presentation Layer
 Composes all layers together. You will need a Dependency Injection framework.
